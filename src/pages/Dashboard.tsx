@@ -50,7 +50,7 @@ export default function Dashboard() {
       lastWatered: "2 days ago",
       nextWatering: "Tomorrow",
       status: "healthy",
-      image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9"
+      image: "https://images.unsplash.com/photo-1597211057963-3806e96714c7?q=80&w=1928&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     snake: {
       name: "Snake Plant",
@@ -61,7 +61,7 @@ export default function Dashboard() {
       lastWatered: "5 days ago",
       nextWatering: "In 3 days",
       status: "healthy",
-      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb"
+      image: "https://images.unsplash.com/photo-1616961162823-aeba510620c6?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     ficus: {
       name: "Fiddle Leaf Fig",
@@ -72,7 +72,7 @@ export default function Dashboard() {
       lastWatered: "6 days ago",
       nextWatering: "Today",
       status: "needs_attention",
-      image: "https://images.unsplash.com/photo-1615729947596-a598e5de0ab3"
+      image: "https://images.unsplash.com/photo-1622673037899-d7914ece9fe8?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
   };
 
