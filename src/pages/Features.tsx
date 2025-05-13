@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { CheckCheck, Droplet, Sun, Leaf, Bell, Cloud, Smartphone, Info } from "lucide-react";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 export default function Features() {
   return (
@@ -74,24 +75,28 @@ export default function Features() {
                   </div>
                 </div>
                 
-                <div className="bg-muted rounded-xl p-6">
-                  <img 
-                    src="/placeholder.svg" 
-                    alt="Smart Monitoring System" 
-                    className="rounded-lg w-full h-auto shadow-md" 
-                  />
+                <div className="bg-muted rounded-xl overflow-hidden">
+                  <AspectRatio ratio={16/9}>
+                    <img 
+                      src="https://images.unsplash.com/photo-1615729947596-a598e5de0ab3" 
+                      alt="Smart Plant Monitoring System" 
+                      className="w-full h-full object-cover" 
+                    />
+                  </AspectRatio>
                 </div>
               </div>
             </TabsContent>
 
             <TabsContent value="automation" id="automation">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <div className="order-2 md:order-1 bg-muted rounded-xl p-6">
-                  <img 
-                    src="/placeholder.svg" 
-                    alt="Automated Plant Care" 
-                    className="rounded-lg w-full h-auto shadow-md" 
-                  />
+                <div className="order-2 md:order-1 bg-muted rounded-xl overflow-hidden">
+                  <AspectRatio ratio={16/9}>
+                    <img 
+                      src="https://images.unsplash.com/photo-1518495973542-4542c06a5843" 
+                      alt="Automated Plant Care" 
+                      className="w-full h-full object-cover" 
+                    />
+                  </AspectRatio>
                 </div>
                 
                 <div className="order-1 md:order-2">
@@ -180,24 +185,28 @@ export default function Features() {
                   </div>
                 </div>
                 
-                <div className="bg-muted rounded-xl p-6">
-                  <img 
-                    src="/placeholder.svg" 
-                    alt="AI Disease Detection" 
-                    className="rounded-lg w-full h-auto shadow-md" 
-                  />
+                <div className="bg-muted rounded-xl overflow-hidden">
+                  <AspectRatio ratio={16/9}>
+                    <img 
+                      src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07" 
+                      alt="AI Disease Detection" 
+                      className="w-full h-full object-cover" 
+                    />
+                  </AspectRatio>
                 </div>
               </div>
             </TabsContent>
 
             <TabsContent value="control" id="control">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <div className="order-2 md:order-1 bg-muted rounded-xl p-6">
-                  <img 
-                    src="/placeholder.svg" 
-                    alt="Mobile & Web Control" 
-                    className="rounded-lg w-full h-auto shadow-md" 
-                  />
+                <div className="order-2 md:order-1 bg-muted rounded-xl overflow-hidden">
+                  <AspectRatio ratio={16/9}>
+                    <img 
+                      src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b" 
+                      alt="Mobile & Web Control" 
+                      className="w-full h-full object-cover" 
+                    />
+                  </AspectRatio>
                 </div>
                 
                 <div className="order-1 md:order-2">
