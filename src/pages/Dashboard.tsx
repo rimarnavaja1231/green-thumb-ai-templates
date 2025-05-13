@@ -20,6 +20,7 @@ import {
 import { Slider } from "@/components/ui/slider";
 import { Progress } from "@/components/ui/progress";
 import { Switch } from "@/components/ui/switch";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { 
   Droplet, 
   Sun, 
@@ -30,6 +31,7 @@ import {
   ChevronUp,
   Bell,
   CheckCheck,
+  Images,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -48,7 +50,7 @@ export default function Dashboard() {
       lastWatered: "2 days ago",
       nextWatering: "Tomorrow",
       status: "healthy",
-      image: "/placeholder.svg"
+      image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9"
     },
     snake: {
       name: "Snake Plant",
@@ -59,7 +61,7 @@ export default function Dashboard() {
       lastWatered: "5 days ago",
       nextWatering: "In 3 days",
       status: "healthy",
-      image: "/placeholder.svg"
+      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb"
     },
     ficus: {
       name: "Fiddle Leaf Fig",
@@ -70,7 +72,7 @@ export default function Dashboard() {
       lastWatered: "6 days ago",
       nextWatering: "Today",
       status: "needs_attention",
-      image: "/placeholder.svg"
+      image: "https://images.unsplash.com/photo-1615729947596-a598e5de0ab3"
     },
   };
 
@@ -104,26 +106,53 @@ export default function Dashboard() {
           </p>
           
           {/* Plant Selector */}
-          <div className="mb-8">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="w-full md:w-auto">
-                  {plants[selectedPlant as keyof typeof plants].name}
-                  <ChevronDown className="ml-2 h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-full">
-                <DropdownMenuItem onClick={() => setSelectedPlant("monstera")}>
-                  Monstera Deliciosa
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setSelectedPlant("snake")}>
-                  Snake Plant
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setSelectedPlant("ficus")}>
-                  Fiddle Leaf Fig
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+          <div className="mb-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="md:col-span-1">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" className="w-full">
+                    {plants[selectedPlant as keyof typeof plants].name}
+                    <ChevronDown className="ml-2 h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-full">
+                  <DropdownMenuItem onClick={() => setSelectedPlant("monstera")}>
+                    Monstera Deliciosa
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setSelectedPlant("snake")}>
+                    Snake Plant
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setSelectedPlant("ficus")}>
+                    Fiddle Leaf Fig
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+            
+            {/* Additional plant thumbnail previews */}
+            <div className="hidden md:grid md:col-span-2 grid-cols-3 gap-3">
+              {Object.entries(plants).map(([key, plant]) => (
+                <div 
+                  key={key}
+                  onClick={() => setSelectedPlant(key)}
+                  className={`cursor-pointer rounded-lg overflow-hidden border-2 transition-all ${
+                    selectedPlant === key ? 'border-primary scale-105' : 'border-transparent hover:border-primary/50'
+                  }`}
+                >
+                  <AspectRatio ratio={4/3}>
+                    <img 
+                      src={plant.image} 
+                      alt={plant.name}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div className="absolute bottom-2 left-2 right-2">
+                      <p className="text-white text-sm font-medium truncate">{plant.name}</p>
+                    </div>
+                  </AspectRatio>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -161,11 +190,13 @@ export default function Dashboard() {
                   </div>
                 </CardHeader>
                 <div className="relative">
-                  <img 
-                    src={plants[selectedPlant as keyof typeof plants].image} 
-                    alt={plants[selectedPlant as keyof typeof plants].name} 
-                    className="h-full w-full object-cover aspect-square md:aspect-auto"
-                  />
+                  <AspectRatio ratio={1/1}>
+                    <img 
+                      src={plants[selectedPlant as keyof typeof plants].image} 
+                      alt={plants[selectedPlant as keyof typeof plants].name} 
+                      className="h-full w-full object-cover"
+                    />
+                  </AspectRatio>
                 </div>
               </div>
               <CardContent className="pt-6">
@@ -278,12 +309,13 @@ export default function Dashboard() {
               <TabsTrigger value="humidity">Humidity</TabsTrigger>
             </TabsList>
             
-            {/* Chart content would go here */}
             <TabsContent value="moisture">
               <Card>
                 <CardContent className="pt-6 pb-2">
-                  <div className="h-[300px] flex items-center justify-center border rounded-md">
-                    <p className="text-muted-foreground">Moisture chart visualization would appear here</p>
+                  <div className="h-[300px] flex items-center justify-center border rounded-md bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=900&q=60')", backgroundBlendMode: "overlay", backgroundColor: "rgba(255,255,255,0.85)" }}>
+                    <div className="bg-background/80 backdrop-blur-sm p-4 rounded-lg">
+                      <p className="text-muted-foreground">Moisture chart visualization would appear here</p>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -292,8 +324,10 @@ export default function Dashboard() {
             <TabsContent value="light">
               <Card>
                 <CardContent className="pt-6 pb-2">
-                  <div className="h-[300px] flex items-center justify-center border rounded-md">
-                    <p className="text-muted-foreground">Light chart visualization would appear here</p>
+                  <div className="h-[300px] flex items-center justify-center border rounded-md bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=900&q=60')", backgroundBlendMode: "overlay", backgroundColor: "rgba(255,255,255,0.85)" }}>
+                    <div className="bg-background/80 backdrop-blur-sm p-4 rounded-lg">
+                      <p className="text-muted-foreground">Light chart visualization would appear here</p>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -302,8 +336,10 @@ export default function Dashboard() {
             <TabsContent value="temperature">
               <Card>
                 <CardContent className="pt-6 pb-2">
-                  <div className="h-[300px] flex items-center justify-center border rounded-md">
-                    <p className="text-muted-foreground">Temperature chart visualization would appear here</p>
+                  <div className="h-[300px] flex items-center justify-center border rounded-md bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=60')", backgroundBlendMode: "overlay", backgroundColor: "rgba(255,255,255,0.85)" }}>
+                    <div className="bg-background/80 backdrop-blur-sm p-4 rounded-lg">
+                      <p className="text-muted-foreground">Temperature chart visualization would appear here</p>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -312,8 +348,10 @@ export default function Dashboard() {
             <TabsContent value="humidity">
               <Card>
                 <CardContent className="pt-6 pb-2">
-                  <div className="h-[300px] flex items-center justify-center border rounded-md">
-                    <p className="text-muted-foreground">Humidity chart visualization would appear here</p>
+                  <div className="h-[300px] flex items-center justify-center border rounded-md bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=900&q=60')", backgroundBlendMode: "overlay", backgroundColor: "rgba(255,255,255,0.85)" }}>
+                    <div className="bg-background/80 backdrop-blur-sm p-4 rounded-lg">
+                      <p className="text-muted-foreground">Humidity chart visualization would appear here</p>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -328,10 +366,21 @@ export default function Dashboard() {
           <h2 className="text-2xl font-bold mb-6">AI Recommendations</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card>
+            <Card className="overflow-hidden">
+              <div className="relative h-32">
+                <img 
+                  src="https://images.unsplash.com/photo-1615729947596-a598e5de0ab3" 
+                  alt="Watering Adjustment"
+                  className="absolute inset-0 h-full w-full object-cover" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
+                  <div className="p-4">
+                    <Droplet className="h-6 w-6 text-white" />
+                  </div>
+                </div>
+              </div>
               <CardHeader className="pb-3">
                 <CardTitle className="flex items-center text-lg">
-                  <Droplet className="h-5 w-5 mr-2 text-primary" />
                   Watering Adjustment
                 </CardTitle>
               </CardHeader>
@@ -343,10 +392,21 @@ export default function Dashboard() {
               </CardFooter>
             </Card>
             
-            <Card>
+            <Card className="overflow-hidden">
+              <div className="relative h-32">
+                <img 
+                  src="https://images.unsplash.com/photo-1518495973542-4542c06a5843" 
+                  alt="Light Optimization"
+                  className="absolute inset-0 h-full w-full object-cover" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
+                  <div className="p-4">
+                    <Sun className="h-6 w-6 text-white" />
+                  </div>
+                </div>
+              </div>
               <CardHeader className="pb-3">
                 <CardTitle className="flex items-center text-lg">
-                  <Sun className="h-5 w-5 mr-2 text-primary" />
                   Light Optimization
                 </CardTitle>
               </CardHeader>
@@ -358,10 +418,21 @@ export default function Dashboard() {
               </CardFooter>
             </Card>
             
-            <Card>
+            <Card className="overflow-hidden">
+              <div className="relative h-32">
+                <img 
+                  src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07" 
+                  alt="Maintenance Tips"
+                  className="absolute inset-0 h-full w-full object-cover" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
+                  <div className="p-4">
+                    <Activity className="h-6 w-6 text-white" />
+                  </div>
+                </div>
+              </div>
               <CardHeader className="pb-3">
                 <CardTitle className="flex items-center text-lg">
-                  <Activity className="h-5 w-5 mr-2 text-primary" />
                   Maintenance Tips
                 </CardTitle>
               </CardHeader>

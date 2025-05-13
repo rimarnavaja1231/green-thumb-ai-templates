@@ -1,8 +1,9 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, Leaf, Droplet, Sun, Activity } from "lucide-react";
+import { ArrowRight, Leaf, Droplet, Sun, Activity, Images } from "lucide-react";
 import { Link } from "react-router-dom";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 export default function Index() {
   return (
@@ -32,11 +33,13 @@ export default function Index() {
             <div className="lg:w-1/2">
               <div className="relative">
                 <div className="bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl p-1">
-                  <img 
-                    src="/placeholder.svg" 
-                    alt="Smart Plant Care System" 
-                    className="rounded-xl h-full w-full object-cover shadow-lg" 
-                  />
+                  <AspectRatio ratio={16/9}>
+                    <img 
+                      src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9" 
+                      alt="Smart Plant Care System" 
+                      className="rounded-xl h-full w-full object-cover shadow-lg" 
+                    />
+                  </AspectRatio>
                 </div>
                 <div className="absolute -bottom-6 -right-6 bg-background p-4 rounded-lg shadow-lg border border-border">
                   <div className="flex items-center gap-3">
@@ -61,9 +64,19 @@ export default function Index() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card>
+            <Card className="overflow-hidden">
+              <div className="relative h-48">
+                <img 
+                  src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" 
+                  alt="Smart Watering Technology"
+                  className="absolute inset-0 h-full w-full object-cover" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div className="absolute bottom-4 left-4">
+                  <Droplet className="h-8 w-8 text-white mb-1" />
+                </div>
+              </div>
               <CardHeader>
-                <Droplet className="h-8 w-8 text-primary mb-2" />
                 <CardTitle>Smart Watering</CardTitle>
                 <CardDescription>
                   Precise soil moisture monitoring and AI-driven watering schedules
@@ -81,9 +94,19 @@ export default function Index() {
               </CardFooter>
             </Card>
             
-            <Card>
+            <Card className="overflow-hidden">
+              <div className="relative h-48">
+                <img 
+                  src="https://images.unsplash.com/photo-1518495973542-4542c06a5843" 
+                  alt="Light Optimization Technology"
+                  className="absolute inset-0 h-full w-full object-cover" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div className="absolute bottom-4 left-4">
+                  <Sun className="h-8 w-8 text-white mb-1" />
+                </div>
+              </div>
               <CardHeader>
-                <Sun className="h-8 w-8 text-primary mb-2" />
                 <CardTitle>Light Optimization</CardTitle>
                 <CardDescription>
                   Continuous light exposure tracking with placement recommendations
@@ -101,9 +124,19 @@ export default function Index() {
               </CardFooter>
             </Card>
             
-            <Card>
+            <Card className="overflow-hidden">
+              <div className="relative h-48">
+                <img 
+                  src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07" 
+                  alt="Disease Detection Technology"
+                  className="absolute inset-0 h-full w-full object-cover" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div className="absolute bottom-4 left-4">
+                  <Leaf className="h-8 w-8 text-white mb-1" />
+                </div>
+              </div>
               <CardHeader>
-                <Leaf className="h-8 w-8 text-primary mb-2" />
                 <CardTitle>Disease Detection</CardTitle>
                 <CardDescription>
                   AI-powered identification of common plant diseases and pests
